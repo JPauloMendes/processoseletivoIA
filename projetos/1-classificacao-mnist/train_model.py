@@ -44,3 +44,26 @@ model = keras.Sequential([
 ])
 
 model.compile(loss="sparse_categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
+
+# 3 e 5. EarlyStopping e configuração do treinamento
+early_stopping = keras.callbacks.EarlyStopping(
+    monitor="val_loss", 
+    patience=3, 
+    restore_best_weights=True
+)
+
+history = model.fit(
+    x_train, y_train, 
+    batch_size=32, 
+    epochs=12, 
+    validation_split=0.1, 
+    callbacks=[early_stopping]
+)
+
+# 6 e 7. Avaliação e geração do arquivo .h5
+val_loss, val_acc = model.evaluate(x_test, y_test, verbose=0)
+print(f"\n=== Resultados Finais ===")
+print(f"Acurácia no conjunto de teste: {val_acc:.4f}")
+
+model.save("model.h5")
+print("Modelo estruturado e salvo com sucesso como 'model.h5'!")
