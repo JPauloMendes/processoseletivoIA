@@ -24,3 +24,23 @@ x_test = x_test.astype("float32") / 255.0
 
 x_train = x_train.reshape(-1, 28, 28, 1)
 x_test = x_test.reshape(-1, 28, 28, 1)
+
+# 4. Montando a arquitetura da CNN
+model = keras.Sequential([
+    keras.Input(shape=(28, 28, 1)),
+
+    layers.Conv2D(32, kernel_size=(3, 3), activation="relu", padding="same"),
+    layers.BatchNormalization(),
+    layers.MaxPooling2D(pool_size=(2, 2)),
+
+    layers.Conv2D(64, kernel_size=(3, 3), activation="relu", padding="same"),
+    layers.BatchNormalization(),
+    layers.MaxPooling2D(pool_size=(2, 2)),
+
+    layers.Flatten(),
+    layers.Dropout(0.5),
+
+    layers.Dense(10, activation="softmax"),
+])
+
+model.compile(loss="sparse_categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
