@@ -16,4 +16,11 @@ from tensorflow.keras import layers
 #   7. Salvar o modelo treinado como "model.h5"
 # ---------------------------------------------------------------------------
 
-# insira seu código aqui
+# 1 e 2. Carregando e tratando os dados (escala 0-1 e formato correto)
+(x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data()
+
+x_train = x_train.astype("float32") / 255.0
+x_test = x_test.astype("float32") / 255.0
+
+x_train = x_train.reshape(-1, 28, 28, 1)
+x_test = x_test.reshape(-1, 28, 28, 1)
