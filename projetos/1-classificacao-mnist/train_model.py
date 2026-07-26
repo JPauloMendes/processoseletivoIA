@@ -16,6 +16,8 @@ from tensorflow.keras import layers
 #   7. Salvar o modelo treinado como "model.h5"
 # ---------------------------------------------------------------------------
 
+os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
+
 # 1 e 2. Carregando e tratando os dados (escala 0-1 e formato correto)
 (x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data()
 
