@@ -85,28 +85,40 @@ projetos/1-classificacao-mnist/
 
 ## 📝 Relatório do Candidato
 
-👤 **Nome Completo:**
+👤 **Nome Completo:** João Paulo Mendes de Souza
 
 ### 1️⃣ Resumo da Arquitetura do Modelo
 
-Descreva, em palavras, a arquitetura da CNN implementada em `train_model.py` (número de blocos convolucionais, uso de batch normalization/dropout, estratégia de validação/early stopping).
+A arquitetura que eu implementei no train_model.py é uma Rede Neural Convolucional (CNN) sequencial que agora conta com 3 blocos convolucionais. O primeiro bloco usa uma camada Conv2D com 32 filtros, o segundo usa 64 filtros, e o terceiro utiliza 128 filtros, extraindo padrões cada vez mais complexos das imagens. Cada convolução é seguida de um BatchNormalization para estabilizar o treinamento e um MaxPooling2D para reduzir o tamanho das matrizes e focar na informação mais relevante. Antes da camada densa de decisão final, adicionei um Dropout (0.5) para desligar alguns neurônios aleatoriamente, obrigando a rede a aprender de verdade em vez de apenas "decorar" as imagens. Para otimizar o tempo, usei a estratégia de EarlyStopping, que monitora o erro na validação e interrompe o processo sozinho se o modelo parar de melhorar.
 
 ### 2️⃣ Bibliotecas Utilizadas
 
-Liste as principais bibliotecas utilizadas, preferencialmente com suas versões.
+TensorFlow / Keras (2.12): Foi a biblioteca principal que usei para montar as camadas da rede neural, treinar e depois converter o modelo.
+NumPy (2.4.6): Utilizada na parte de inferência para ajustar o formato dos dados e extrair a resposta final usando o argmax.
+OS (Python 3.11.15): Utilizada para mexer nas variáveis de ambiente e forçar o sistema a executar o modelo apenas na CPU.
 
 ### 3️⃣ Técnica de Otimização do Modelo
 
-Explique qual técnica foi utilizada para otimizar o modelo em `optimize_model.py`.
+No arquivo optimize_model.py, utilizei a técnica de Quantização (Dynamic Range Quantization) nativa do TensorFlow Lite. Ela converte os "pesos" da rede neural de números pesados de ponto flutuante (float32) para números inteiros menores (int8). Isso reduz muito o tamanho do modelo para que ele possa rodar em dispositivos de borda com pouca memória, mantendo a precisão quase intacta.
 
 ### 4️⃣ Resultados Obtidos
 
-Informe a acurácia de validação obtida e o tamanho dos arquivos `model.h5` e `model.tflite`.
+Acurácia no conjunto de teste: 99.16% (0.9916).
+Tamanho do model.h5 (Original): 1.2MB.
+Tamanho do model.tflite (Otimizado): 108KB.
 
 ### 5️⃣ Comentários Adicionais (Opcional)
 
-Dificuldades encontradas, decisões técnicas importantes, limitações do modelo, aprendizados durante o desafio.
+A adição do terceiro bloco convolucional foi uma mudança para cumprir os requisitos do projeto e aumentar a capacidade de aprendizado da rede. O resultado foi muito bom, alcançando uma acurácia final de 0.9916. Foi interessante o impacto físico dessa mudança uma vez que como o modelo ganhou mais parâmetros matemáticos, o tamanho do arquivo original subiu de 643KB para 1.2MB, o qual duplicou praticamente. Mesmo com esse aumento, a técnica de quantização continuou sendo super eficiente, comprimindo o modelo final para apenas 108KB, o que é ótimo para dispositivos menores sem muita capacidade de armazenamento.
 
 ### 6️⃣ Exemplo de Inferência
 
-Cole a saída do terminal ao rodar `run_inference.py` (predito vs. real para as 5+ amostras), e comente brevemente se houve algum caso interessante (acerto ou erro) entre as amostras testadas.
+Abaixo está a saída do terminal quando rodei o meu arquivo run_inference.py com o modelo otimizado:
+
+Amostra 1: predito=7 | real=7
+Amostra 2: predito=2 | real=2
+Amostra 3: predito=1 | real=1
+Amostra 4: predito=0 | real=0
+Amostra 5: predito=4 | real=4
+
+Fiquei muito satisfeito com esse teste. O modelo em .tflite acertou 100% dessas 5 primeiras amostras. Isso mostra que a técnica de quantização realmente funciona uma vez que reduzimos o peso do arquivo em cerca de 10 vezes, mesmo assim, foi mantido a inteligência da rede neural.
