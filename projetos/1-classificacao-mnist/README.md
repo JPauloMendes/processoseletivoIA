@@ -122,3 +122,4 @@ Amostra 4: predito=0 | real=0
 Amostra 5: predito=4 | real=4
 
 Fiquei muito satisfeito com esse teste. O modelo em .tflite acertou 100% dessas 5 primeiras amostras. Isso mostra que a técnica de quantização realmente funciona uma vez que reduzimos o peso do arquivo em cerca de 10 vezes, mesmo assim, foi mantido a inteligência da rede neural.
+ 
