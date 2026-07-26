@@ -16,6 +16,8 @@ from tensorflow.keras import layers
 #   7. Salvar o modelo treinado como "model.h5"
 # ---------------------------------------------------------------------------
 
+import os
+
 os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 
 # 1 e 2. Carregando e tratando os dados (escala 0-1 e formato correto)
