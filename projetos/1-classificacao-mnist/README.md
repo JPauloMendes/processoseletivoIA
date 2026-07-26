@@ -103,13 +103,13 @@ No arquivo optimize_model.py, utilizei a técnica de Quantização (Dynamic Rang
 
 ### 4️⃣ Resultados Obtidos
 
-Acurácia no conjunto de teste: 99.16% (0.9916).
-Tamanho do model.h5 (Original): 1.2MB.
-Tamanho do model.tflite (Otimizado): 108KB.
+Acurácia no conjunto de teste: 99.23% (0.9923).
+Tamanho do model.h5 (Original): 1.3MB.
+Tamanho do model.tflite (Otimizado): 113KB.
 
 ### 5️⃣ Comentários Adicionais (Opcional)
 
-A adição do terceiro bloco convolucional foi uma mudança para cumprir os requisitos do projeto e aumentar a capacidade de aprendizado da rede. O resultado foi muito bom, alcançando uma acurácia final de 0.9916. Foi interessante o impacto físico dessa mudança uma vez que como o modelo ganhou mais parâmetros matemáticos, o tamanho do arquivo original subiu de 643KB para 1.2MB, o qual duplicou praticamente. Mesmo com esse aumento, a técnica de quantização continuou sendo super eficiente, comprimindo o modelo final para apenas 108KB, o que é ótimo para dispositivos menores sem muita capacidade de armazenamento.
+A adição do terceiro bloco convolucional foi uma mudança para cumprir os requisitos do projeto e aumentar a capacidade de aprendizado da rede. O resultado foi muito bom, alcançando uma acurácia final de 0.9923. Foi interessante o impacto físico dessa mudança uma vez que como o modelo ganhou mais parâmetros matemáticos, o tamanho do arquivo original subiu de 643KB para 1.3MB, o qual duplicou praticamente. Mesmo com esse aumento, a técnica de quantização continuou sendo super eficiente, comprimindo o modelo final para apenas 113KB, o que é ótimo para dispositivos menores sem muita capacidade de armazenamento. Além disso, tive que ajustar a versão do tensorflow pois o mesmo estava numa versão diferente.
 
 ### 6️⃣ Exemplo de Inferência
 
